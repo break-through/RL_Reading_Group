@@ -1,0 +1,8 @@
+# Introduction
+This is meant to hold information/notes related to 'rl_survey_figure_5_playground.py'. Each section will relate to the code by referring the class-function name and line.
+
+# Q vs Q(s,a)
+This is to clarify the notation from a misconception that may occur with notation if one doesn't get enough sleep (like me). Queue-Dyna/Prioritized Sweeping uses 'queues' to work - specifically prioritiy queues (max heaps) that pop out the highest priority. However, one - unlike the Kaelbling paper's suggestion, Queue-Dyna and PS are a bit [different](https://www.tu-chemnitz.de/informatik/KI/scripts/ws0910/ml09_9.pdf), and two - Q in the code is referencing Q(s,a)(as far as I can tell), but as an abstract class which requires implementing only the 'update' function, but sets the rest of the update to be only handled by the environment (as it should be).
+
+# Initializing Q(s,a)
+This is for *class Q*, and function *set_all_actions(...)*. On line 45, a comment discusses initialization, which was a question in discussion. According to this link [here](http://www.incompleteideas.net/609%20dropbox/slides%20(pdf%20and%20keynote)/drafts%20from%20last%20year/15-efficient-planning-with-backups.pdf), on slide **21**, we see that the V(s) is arbitrarily assigned first, and that Q(s,a) is equal to V(s). Therefore, while *not* directly stated (unless missed upon reading) in the paper by Kaelbling, what was done seems to be the norm.
