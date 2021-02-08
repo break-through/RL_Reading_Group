@@ -4,11 +4,11 @@ import rl.fig5.IAction;
 
 import java.util.Objects;
 
-public abstract class IExperience<S, A, R> {
-    abstract S getState();
-    abstract A getAction();
-    abstract R getReward();
-    abstract S getNextState();
+public abstract class IExperience<S, A> {
+    public abstract S getState();
+    public abstract A getAction();
+    public abstract IReward getReward();
+    public abstract S getNextState();
     
     @Override
     public String toString() {
@@ -26,7 +26,7 @@ public abstract class IExperience<S, A, R> {
         if (!(obj instanceof IExperience)) {
             return false;
         }
-        final IExperience<?, ?, ?> other = (IExperience<?, ?, ?>) obj;
+        final IExperience<?, ?> other = (IExperience<?, ?>) obj;
         return getState().equals(other.getState())
             && getAction().equals(other.getAction())
             && getReward().equals(other.getReward())

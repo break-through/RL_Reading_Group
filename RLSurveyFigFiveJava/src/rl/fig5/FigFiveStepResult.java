@@ -1,8 +1,9 @@
 package rl.fig5;
 
+import rl.env.IReward;
 import rl.env.IStepResult;
 
-public class FigFiveStepResult extends IStepResult<IState, IReward> {
+public class FigFiveStepResult extends IStepResult<IState> {
     private final IReward reward;
     private final IState nextState;
     

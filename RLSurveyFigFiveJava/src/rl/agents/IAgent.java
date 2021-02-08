@@ -1,4 +1,9 @@
-package rl.env;
+package rl.agents;
+
+import rl.env.ConcreteExperience;
+import rl.env.IEnvironment;
+import rl.env.IExperience;
+import rl.env.IStepResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,21 +21,21 @@ import java.util.List;
  *
  * NOTE: DO NOT MODIFY THIS FILE.
  */
-public abstract class IAgent<S, A, R> {
+public abstract class IAgent<S, A> {
     /*
      * The environment of this agent. This environment can be accessed
      * publicly, and it represents the environment of this agent.
      */
-    public final IEnvironment<S, A, R> environment;
+    public final IEnvironment<S, A> environment;
     /*
      * The history of this agent. This allows you to retrace where this
      * agent has been.
      * Technically speaking, this variable is READ-ONLY. However, if you
      * want to throw away experiences (by removing them), be my guest.
      */
-    private final List<IExperience<S, A, R>> history;
+    private final List<IExperience<S, A>> history;
     
-    public IAgent(IEnvironment<S, A, R> environment) {
+    public IAgent(IEnvironment<S, A> environment) {
         this.environment = environment;
         this.history = new ArrayList<>();
     }
@@ -61,7 +66,7 @@ public abstract class IAgent<S, A, R> {
      * Returns the most recent experience that this agent acquired by
      * having stepped into its environment.
      */
-    final public IExperience<S, A, R> lastExperience() {
+    final public IExperience<S, A> lastExperience() {
         return lastExperienceImpl();
     }
     
@@ -136,8 +141,8 @@ public abstract class IAgent<S, A, R> {
         }
         final A action = policy();
         final S currentState = getCurrentState();
-        final IStepResult<S, R> stepResult = environment.step(currentState, action);
-        final IExperience<S, A, R> experience = new ConcreteExperience<>(
+        final IStepResult<S> stepResult = environment.step(currentState, action);
+        final IExperience<S, A> experience = new ConcreteExperience<>(
             currentState,
             action,
             stepResult.getReward(),
@@ -154,7 +159,7 @@ public abstract class IAgent<S, A, R> {
         return environment.getStartState();
     }
     
-    final protected IExperience<S, A, R> lastExperienceImpl() {
+    final protected IExperience<S, A> lastExperienceImpl() {
         if (!hasHistory()) {
             throw new RuntimeException("This agent doesn't have a history");
         }

@@ -1,7 +1,7 @@
 package rl.env;
 
-public abstract class IStepResult<S, R> {
-    public abstract R getReward();
+public abstract class IStepResult<S> {
+    public abstract IReward getReward();
     public abstract S getState();
     
     @Override
@@ -9,7 +9,7 @@ public abstract class IStepResult<S, R> {
         if (!(obj instanceof IStepResult)) {
             return false;
         }
-        IStepResult<?,?> other = (IStepResult<?, ?>) obj;
+        IStepResult<?> other = (IStepResult<?>) obj;
         return getReward().equals(other.getReward())
             && getState().equals(other.getState());
     }

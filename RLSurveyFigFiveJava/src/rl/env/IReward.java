@@ -1,9 +1,9 @@
-package rl.fig5;
+package rl.env;
 
 import java.util.Objects;
 
 public abstract class IReward {
-    abstract int reward();
+    public abstract int reward();
     
     @Override
     public String toString() {
