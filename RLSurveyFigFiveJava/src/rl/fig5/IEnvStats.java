@@ -1,5 +1,7 @@
 package rl.fig5;
 
+import java.util.Objects;
+
 public abstract class IEnvStats {
     abstract int getN();
     abstract int getNSquared();
@@ -16,5 +18,10 @@ public abstract class IEnvStats {
             n_squared,
             two_exp_n
         );
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(getN());
     }
 }

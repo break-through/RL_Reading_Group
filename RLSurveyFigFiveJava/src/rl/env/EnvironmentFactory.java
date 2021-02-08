@@ -6,7 +6,7 @@ import rl.fig5.IReward;
 import rl.fig5.IState;
 
 public final class EnvironmentFactory {
-    public static EnvironmentWithGoal<IState, IAction, IReward> getFigFiveEnvironment(int n) {
+    public static IEnvironmentWithGoal<IState, IAction, IReward> getFigFiveEnvironment(int n) {
         return new FigFiveEnvironment(n);
     }
 }

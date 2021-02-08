@@ -1,5 +1,7 @@
 package rl.fig5;
 
+import java.util.Objects;
+
 public abstract class IReward {
     abstract int reward();
     
@@ -15,5 +17,10 @@ public abstract class IReward {
         }
         final IReward other = (IReward) obj;
         return this.reward() == other.reward();
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(reward());
     }
 }

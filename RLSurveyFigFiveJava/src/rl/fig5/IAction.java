@@ -1,5 +1,7 @@
 package rl.fig5;
 
+import java.util.Objects;
+
 public abstract class IAction {
     abstract String getName();
     
@@ -15,5 +17,10 @@ public abstract class IAction {
         }
         final IAction other = (IAction) obj;
         return this.getName().equals(other.getName());
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 }

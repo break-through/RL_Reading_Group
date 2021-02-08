@@ -1,7 +1,5 @@
 package rl.env;
 
-import rl.fig5.IAction;
-
 import java.util.List;
 
 /**
@@ -20,8 +18,8 @@ import java.util.List;
  * agent may earn a reward that is encoded in the StepResult.
  * @see #step(Object, Object)
  */
-public interface Environment<S, A, R> {
+public interface IEnvironment<S, A, R> {
     S getStartState();
-    List<IAction> getActionsForState(S state);
-    StepResult<S, R> step(S state, A action);
+    List<A> getActionsForState(S state);
+    IStepResult<S, R> step(S state, A action);
 }

@@ -1,8 +1,8 @@
 package rl.fig5;
 
-import rl.env.StepResult;
+import rl.env.IStepResult;
 
-public class FigFiveStepResult implements StepResult<IState, IReward> {
+public class FigFiveStepResult extends IStepResult<IState, IReward> {
     private final IReward reward;
     private final IState nextState;
     
@@ -21,22 +21,4 @@ public class FigFiveStepResult implements StepResult<IState, IReward> {
         return nextState;
     }
     
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof StepResult)) {
-            return false;
-        }
-        StepResult<?,?> other = (StepResult<?, ?>) obj;
-        return getReward().equals(other.getReward())
-            && getState().equals(other.getState());
-    }
-    
-    @Override
-    public String toString() {
-        return String.format(
-            "StepResult(reward=%s, next_state=%s)",
-            getReward(),
-            getState()
-        );
-    }
 }

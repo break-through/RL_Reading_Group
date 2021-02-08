@@ -1,14 +1,14 @@
 package rl.fig5;
 
-import rl.env.EnvironmentWithGoal;
-import rl.env.StepResult;
+import rl.env.IEnvironmentWithGoal;
+import rl.env.IStepResult;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-final public class FigFiveEnvironment implements EnvironmentWithGoal<IState, IAction, IReward>, Iterable<IState> {
+final public class FigFiveEnvironment implements IEnvironmentWithGoal<IState, IAction, IReward>, Iterable<IState> {
     final private int n;
     final private IEnvStats stats;
     
@@ -39,7 +39,7 @@ final public class FigFiveEnvironment implements EnvironmentWithGoal<IState, IAc
     }
     
     @Override
-    public StepResult<IState, IReward> step(IState state, IAction action) {
+    public IStepResult<IState, IReward> step(IState state, IAction action) {
         raiseIfInvalidState(state);
         raiseIfInvalidActionForState(state, action);
         IState nextState = action.equals(FORWARD)
