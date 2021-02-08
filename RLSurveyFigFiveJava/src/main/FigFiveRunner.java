@@ -1,10 +1,10 @@
 package main;
 
 import rl.env.StepResult;
-import rl.fig5.Action;
+import rl.fig5.IAction;
 import rl.fig5.FigFiveEnvironment;
-import rl.fig5.Reward;
-import rl.fig5.State;
+import rl.fig5.IReward;
+import rl.fig5.IState;
 
 public class FigFiveRunner {
     public static void main(String[] args) {
@@ -12,12 +12,12 @@ public class FigFiveRunner {
         FigFiveEnvironment env = new FigFiveEnvironment(N);
         System.out.println(env.getStats());
         System.out.println(env);
-        State currentState = env.getStartState();
+        IState currentState = env.getStartState();
         System.out.println(env.getStats());
         System.out.println(env.toStringInState(currentState));
         System.out.println(env.getActionsForState(currentState));
-        Action action = env.getActionsForState(currentState).get(0);
-        StepResult<State, Reward> stepResult = env.step(currentState, action);
+        IAction action = env.getActionsForState(currentState).get(0);
+        StepResult<IState, IReward> stepResult = env.step(currentState, action);
         System.out.println(stepResult);
         currentState = stepResult.getState();
         System.out.println(env.toStringInState(currentState));

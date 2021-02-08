@@ -1,6 +1,6 @@
 package rl.fig5;
 
-public abstract class Action {
+public abstract class IAction {
     abstract String getName();
     
     @Override
@@ -10,10 +10,10 @@ public abstract class Action {
     
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Action)) {
+        if (!(obj instanceof IAction)) {
             return false;
         }
-        final Action other = (Action) obj;
+        final IAction other = (IAction) obj;
         return this.getName().equals(other.getName());
     }
 }

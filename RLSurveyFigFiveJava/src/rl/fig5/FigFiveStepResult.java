@@ -2,22 +2,22 @@ package rl.fig5;
 
 import rl.env.StepResult;
 
-public class FigFiveStepResult implements StepResult<State, Reward> {
-    private final Reward reward;
-    private final State nextState;
+public class FigFiveStepResult implements StepResult<IState, IReward> {
+    private final IReward reward;
+    private final IState nextState;
     
-    public FigFiveStepResult(Reward reward, State nextState) {
+    public FigFiveStepResult(IReward reward, IState nextState) {
         this.reward = reward;
         this.nextState = nextState;
     }
     
     @Override
-    public Reward getReward() {
+    public IReward getReward() {
         return reward;
     }
     
     @Override
-    public State getState() {
+    public IState getState() {
         return nextState;
     }
     

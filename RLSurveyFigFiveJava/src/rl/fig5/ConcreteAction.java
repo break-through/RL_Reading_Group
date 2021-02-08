@@ -1,6 +1,6 @@
 package rl.fig5;
 
-public class ConcreteAction extends Action {
+public class ConcreteAction extends IAction {
     private final String name;
     
     public ConcreteAction(String name) {

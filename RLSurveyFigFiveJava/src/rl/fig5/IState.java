@@ -1,6 +1,6 @@
 package rl.fig5;
 
-public abstract class State {
+public abstract class IState {
     abstract int getN();
     
     @Override
@@ -10,10 +10,10 @@ public abstract class State {
     
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof State)) {
+        if (!(obj instanceof IState)) {
             return false;
         }
-        final State other = (State) obj;
+        final IState other = (IState) obj;
         return this.getN() == other.getN();
     }
 }

@@ -1,6 +1,6 @@
 package rl.env;
 
-import rl.fig5.Action;
+import rl.fig5.IAction;
 
 import java.util.List;
 
@@ -22,6 +22,6 @@ import java.util.List;
  */
 public interface Environment<S, A, R> {
     S getStartState();
-    List<Action> getActionsForState(S state);
+    List<IAction> getActionsForState(S state);
     StepResult<S, R> step(S state, A action);
 }

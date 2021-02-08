@@ -1,6 +1,6 @@
 package rl.fig5;
 
-final public class ConcreteEnvStats extends EnvStats {
+final public class ConcreteEnvStats extends IEnvStats {
     final private int n;
     final private int n_sqr;
     final private int two_exp_n;

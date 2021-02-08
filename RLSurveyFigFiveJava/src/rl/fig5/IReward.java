@@ -1,6 +1,6 @@
 package rl.fig5;
 
-public abstract class Reward {
+public abstract class IReward {
     abstract int reward();
     
     @Override
@@ -10,10 +10,10 @@ public abstract class Reward {
     
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Reward)) {
+        if (!(obj instanceof IReward)) {
             return false;
         }
-        final Reward other = (Reward) obj;
+        final IReward other = (IReward) obj;
         return this.reward() == other.reward();
     }
 }

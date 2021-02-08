@@ -1,6 +1,6 @@
 package rl.fig5;
 
-public class ConcreteState extends State {
+public class ConcreteState extends IState {
     final private int n;
     
     public ConcreteState(int n) {

@@ -1,6 +1,6 @@
 package rl.fig5;
 
-public abstract class EnvStats {
+public abstract class IEnvStats {
     abstract int getN();
     abstract int getNSquared();
     abstract int getTwoExpN();

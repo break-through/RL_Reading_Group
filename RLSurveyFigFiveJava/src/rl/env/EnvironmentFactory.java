@@ -1,12 +1,12 @@
 package rl.env;
 
-import rl.fig5.Action;
+import rl.fig5.IAction;
 import rl.fig5.FigFiveEnvironment;
-import rl.fig5.Reward;
-import rl.fig5.State;
+import rl.fig5.IReward;
+import rl.fig5.IState;
 
 public final class EnvironmentFactory {
-    public static EnvironmentWithGoal<State, Action, Reward> getFigFiveEnvironment(int n) {
+    public static EnvironmentWithGoal<IState, IAction, IReward> getFigFiveEnvironment(int n) {
         return new FigFiveEnvironment(n);
     }
 }
