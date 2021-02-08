@@ -42,12 +42,13 @@ class Q:
 
     # Environment calls this at initialization.
     # Override this method to initialize the Q values.
-    # This one does so randomly.
+    # This one does so randomly. See link in associated file 'DynaQueue.md'.
     # Promise: Environment will give all action pairs
     def set_all_actions(self, actions: Dict[TState, List[Action]]) -> None:
         for state in actions.keys():
             for action in actions[state]:
                 self._Q[state, action] = random.random()
+    
 
     # OVERRIDE MUST IMPLEMENT
     @abstractmethod
@@ -199,7 +200,7 @@ class Env:
 # If anyone wants, implement the CertaintyEquivalentQ
 # it's dumb but writing it requires writing an algorithm
 # to solve linear equations. ain't anybody got time for
-# that.
+# that. *cue remix* 
 
 class DynaQ(Q):
     def __init__(self, gamma: float, k: int = 1) -> None:
