@@ -1,7 +1,7 @@
 package rl.fig5;
 
+import rl.env.ConcreteReward;
 import rl.env.IEnvironmentWithGoal;
-import rl.env.IReward;
 import rl.env.IStepResult;
 
 import java.util.ArrayList;

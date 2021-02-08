@@ -1,4 +1,4 @@
-package rl.fig5;
+package rl.env;
 
 import rl.env.IReward;
 
