@@ -41,8 +41,7 @@ public class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
         final S s = experience.getState();
         final A a = experience.getAction();
         fullBackup(s, a);
-        List<Pair<S, A>> samples = sampleKStateActionPairs();
-        for (Pair<S, A> pair : samples) {
+        for (Pair<S, A> pair : sampleKStateActionPairs()) {
             fullBackup(pair);
         }
     }
