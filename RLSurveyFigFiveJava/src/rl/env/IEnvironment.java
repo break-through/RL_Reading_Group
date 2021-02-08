@@ -20,6 +20,7 @@ import java.util.List;
  */
 public interface IEnvironment<S, A> {
     S getStartState();
+    List<S> getAllStates();
     List<A> getActionsForState(S state);
     IStepResult<S> step(S state, A action);
 }

@@ -4,6 +4,7 @@ import rl.env.ConcreteExperience;
 import rl.env.IEnvironment;
 import rl.env.IExperience;
 import rl.env.IStepResult;
+import util.Counter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +34,12 @@ public abstract class IAgent<S, A> {
      * want to throw away experiences (by removing them), be my guest.
      */
     private final List<IExperience<S, A>> history;
+    private final Counter stepCounter;
     
     public IAgent(IEnvironment<S, A> environment) {
         this.environment = environment;
         this.history = new ArrayList<>();
+        this.stepCounter = new Counter();
     }
     
     // Public Methods that are Useful
@@ -87,6 +90,17 @@ public abstract class IAgent<S, A> {
     abstract A policy();
     
     /**
+     * For Model-Based algorithms, implement this method to update
+     * the models right after taking an experience (i.e., an experience
+     * tuple). This method is called in the step phase before calling
+     * the {@link IAgent#learn()} method.
+     *
+     * Useful methods are listed in the {@link IAgent#policy()} method.
+     */
+    protected void updateModels() {
+    }
+    
+    /**
      * This method should learn from the most recent experience and,
      * optionally, from all the previous experiences stored in the
      * history variables. You may store additional variables to make
@@ -96,6 +110,11 @@ public abstract class IAgent<S, A> {
      * Useful methods are listed in the {@link IAgent#policy()} method.
      */
     abstract void learn();
+    
+    /**
+     * Returns the optimal value of the state s
+     */
+    abstract double value(S s);
     
     /**
      * Make the agent step in the environment. This automatically
@@ -129,6 +148,10 @@ public abstract class IAgent<S, A> {
         return availableActions().size() > 0;
     }
     
+    final public long getNumSteps() {
+        return stepCounter.value();
+    }
+    
     //
     // Private Methods that You can Use
     //
@@ -138,6 +161,7 @@ public abstract class IAgent<S, A> {
             // Do nothing if we can't take any actions at this state.
             return;
         }
+        stepCounter.increment();
         final A action = policy();
         final S currentState = getCurrentState();
         final IStepResult<S> stepResult = environment.step(currentState, action);
@@ -148,6 +172,7 @@ public abstract class IAgent<S, A> {
             stepResult.getState()
         );
         history.add(experience);
+        updateModels();
         learn();
     }
     

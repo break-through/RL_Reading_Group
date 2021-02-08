@@ -23,6 +23,13 @@ final public class FigFiveEnvironment implements IEnvironmentWithGoal<IState, IA
     }
     
     @Override
+    public List<IState> getAllStates() {
+        List<IState> states = new ArrayList<>();
+        this.forEach(states::add);
+        return states;
+    }
+    
+    @Override
     public IState getStartState() {
         return START_STATE;
     }

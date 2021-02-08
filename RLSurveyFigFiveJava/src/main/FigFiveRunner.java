@@ -3,7 +3,6 @@ package main;
 import rl.env.IStepResult;
 import rl.fig5.IAction;
 import rl.fig5.FigFiveEnvironment;
-import rl.env.IReward;
 import rl.fig5.IState;
 
 public class FigFiveRunner {
