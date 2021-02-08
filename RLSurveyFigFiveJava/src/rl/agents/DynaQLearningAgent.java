@@ -38,9 +38,7 @@ public class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     @Override
     void learn() {
         final IExperience<S, A> experience = lastExperience();
-        final S s = experience.getState();
-        final A a = experience.getAction();
-        fullBackup(s, a);
+        fullBackup(experience);
         for (Pair<S, A> pair : sampleKStateActionPairs()) {
             fullBackup(pair);
         }

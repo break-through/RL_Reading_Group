@@ -111,6 +111,10 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         fullBackup(pair.getLeft(), pair.getRight());
     }
     
+    final protected void fullBackup(IExperience<S, A> experience) {
+        fullBackup(experience.getState(), experience.getAction());
+    }
+    
     final protected void fullBackup(S s, A a) {
         fullBackupsCounter.increment();
         final double r = reward(s, a);
