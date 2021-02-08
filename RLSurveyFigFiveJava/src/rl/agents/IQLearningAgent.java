@@ -2,15 +2,19 @@ package rl.agents;
 
 import rl.env.IEnvironment;
 import rl.env.IExperience;
-import rl.env.IReward;
 import util.Pair;
 
 import java.util.*;
 
 public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     private final Map<Pair<S, A>, Double> Q;
-    public IQLearningAgent(IEnvironment<S, A> environment) {
+    private final double alpha;
+    private final double gamma;
+    
+    public IQLearningAgent(IEnvironment<S, A> environment, double alpha, double gamma) {
         super(environment);
+        this.alpha = alpha;
+        this.gamma = gamma;
         this.Q = new HashMap<>();
     }
     
@@ -22,11 +26,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         return Q.get(Pair.make(s, a));
     }
     
-    final protected int sampleBackup(
-        IExperience<S, A> experience,
-        double gamma,
-        double alpha
-    ) {
+    final protected int sampleBackup(IExperience<S, A> experience) {
         final S s = experience.getState();
         final A a = experience.getAction();
         final double r = experience.getReward().reward();
@@ -36,6 +36,9 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         return 1;
     }
     
+    // TODO: add a method that gives you the best action for state S,
+    //  and use that method instead to figure out the maxQAtState. That
+    //  will help avoid computations.
     final protected double maxQAtState(S s) {
         final Set<Pair<S, A>> all_pairs = Q.keySet();
         final List<Pair<S, A>> okay_pairs = new ArrayList<>();
