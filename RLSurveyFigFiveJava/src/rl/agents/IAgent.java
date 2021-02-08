@@ -17,7 +17,6 @@ import java.util.List;
  *
  * @param <S> The kind of states you find in this environment
  * @param <A> The actions that this agent can take in this environment
- * @param <R> The kind of reward that this agent can get in this environment
  *
  * NOTE: DO NOT MODIFY THIS FILE.
  */
