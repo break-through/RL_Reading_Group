@@ -27,10 +27,7 @@ public class CounterDistribution<S> implements ICounterDistribution<S> {
         if (!hasState(s)) {
             return 0.0;
         }
-        if (should_recompute) {
-            should_recompute = false;
-            recomputeProbabilities();
-        }
+        checkRecomputation();
         return probabilities.get(s);
     }
     
@@ -51,11 +48,30 @@ public class CounterDistribution<S> implements ICounterDistribution<S> {
     }
     
     @Override
+    public List<S> reachables() {
+        List<S> reachables = new ArrayList<>();
+        checkRecomputation();
+        for (S s : counts.keySet()) {
+            if (prob(s) > 0) {
+                reachables.add(s);
+            }
+        }
+        return reachables;
+    }
+    
+    @Override
     public String toString() {
         return super.toString();
     }
     
     // Private Methods
+    
+    private void checkRecomputation() {
+        if (should_recompute) {
+            should_recompute = false;
+            recomputeProbabilities();
+        }
+    }
     
     private void recomputeProbabilities() {
         final Set<S> keys = counts.keySet();

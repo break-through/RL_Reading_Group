@@ -3,10 +3,7 @@ package rl.agents;
 import rl.env.IEnvironment;
 import rl.env.IExperience;
 import rl.env.RLException;
-import util.Counter;
-import util.CounterDistribution;
-import util.ICounterDistribution;
-import util.Pair;
+import util.*;
 
 import java.util.*;
 
@@ -17,6 +14,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     private final Map<Pair<S, A>, ICounterDistribution<S>> T;
     private final Map<Pair<S, A>, Double> R;
     private final Counter sampleBackupsCounter;
+    private final Counter fullBackupsCounter;
     
     public IQLearningAgent(
         IEnvironment<S, A> environment,
@@ -30,10 +28,19 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         this.T = new HashMap<>();
         this.R = new HashMap<>();
         this.sampleBackupsCounter = new Counter();
+        this.fullBackupsCounter = new Counter();
     }
     
-    final public long getNumBackups() {
+    final public long getTotalNumBackups() {
+        return getNumSampleBackups() + getNumFullBackups();
+    }
+    
+    final public long getNumSampleBackups() {
         return sampleBackupsCounter.value();
+    }
+    
+    final public long getNumFullBackups() {
+        return fullBackupsCounter.value();
     }
     
     final public double reward(S s, A a) {
@@ -98,6 +105,22 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     
     final protected double getQ(Pair<S, A> pair) {
         return getQ(pair.getLeft(), pair.getRight());
+    }
+    
+    final protected void fullBackup(Pair<S, A> pair) {
+        fullBackup(pair.getLeft(), pair.getRight());
+    }
+    
+    final protected void fullBackup(S s, A a) {
+        fullBackupsCounter.increment();
+        final double r = reward(s, a);
+        final IDistribution<S> dist = getTransitionDistribution(s, a);
+        double summation = 0;
+        for (S s_prime : dist.reachables()) {
+            summation += dist.prob(s_prime) * maxQAtState(s_prime);
+        }
+        setQ(s, a, r + (gamma * summation));
+        
     }
     
     final protected void sampleBackup(IExperience<S, A> experience) {
