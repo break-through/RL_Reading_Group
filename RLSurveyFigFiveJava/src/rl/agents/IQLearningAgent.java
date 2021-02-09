@@ -87,8 +87,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     }
     
     final protected ICounterDistribution<S> getTransitionDistribution(S s, A a) {
-        final Pair<S, A> pair = Pair.make(s, a);
-        return T.getOrDefault(pair, new CounterDistribution<>());
+        return T.getOrDefault(Pair.make(s, a), new CounterDistribution<>());
     }
     
     final protected ICounterDistribution<S> getTransitionDistribution(Pair<S, A> pair) {
@@ -117,13 +116,12 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     
     final protected void fullBackup(S s, A a) {
         fullBackupsCounter.increment();
-        final double r = reward(s, a);
         final IDistribution<S> dist = getTransitionDistribution(s, a);
         double summation = 0;
         for (S s_prime : dist.reachables()) {
             summation += dist.prob(s_prime) * maxQAtState(s_prime);
         }
-        setQ(s, a, r + (gamma * summation));
+        setQ(s, a, reward(s, a) + (gamma * summation));
         
     }
     
