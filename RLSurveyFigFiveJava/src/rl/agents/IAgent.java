@@ -5,9 +5,9 @@ import rl.env.IEnvironment;
 import rl.env.IExperience;
 import rl.env.IStepResult;
 import util.Counter;
+import util.Pair;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * This represents an agent that is moving through an environment. All of
@@ -33,13 +33,27 @@ public abstract class IAgent<S, A> {
      * Technically speaking, this variable is READ-ONLY. However, if you
      * want to throw away experiences (by removing them), be my guest.
      */
-    private final List<IExperience<S, A>> history;
+    protected final List<IExperience<S, A>> history;
+    
+    /*
+     * This counts the number of steps we've made so far!
+     */
     private final Counter stepCounter;
+    
+    /*
+     * This keeps track of the set of observed state action pairs so
+     * far. This variable can be easily gotten from the history, but
+     * this is extracting it here because it'll be more expensive to
+     * get it from history.
+     * This is READ-ONLY!
+     */
+    protected final Set<Pair<S, A>> observedStateActionPairs;
     
     public IAgent(IEnvironment<S, A> environment) {
         this.environment = environment;
-        this.history = new ArrayList<>();
-        this.stepCounter = new Counter();
+        history = new ArrayList<>();
+        stepCounter = new Counter();
+        observedStateActionPairs = new HashSet<>();
     }
     
     // Public Methods that are Useful
@@ -170,6 +184,9 @@ public abstract class IAgent<S, A> {
             action,
             stepResult.getReward(),
             stepResult.getState()
+        );
+        observedStateActionPairs.add(
+            Pair.make(experience.getState(), experience.getAction())
         );
         history.add(experience);
         updateModels();
