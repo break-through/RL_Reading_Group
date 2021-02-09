@@ -1,11 +1,11 @@
 package rl.agents;
 
 import rl.env.IEnvironment;
-import rl.env.IExperience;
 import rl.env.RLException;
+import util.EqualDistribution;
 import util.Pair;
 
-import java.util.List;
+import java.util.*;
 
 public class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     private final int k;
@@ -24,9 +24,7 @@ public class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
         try {
             return bestActionAtState(getCurrentState());
         } catch (RLException e) {
-            // TODO: Sample from an "EqualDistribution" that takes
-            //  in the list of available actions at the current state.
-            throw new RuntimeException(e);
+            return new EqualDistribution<>(availableActions()).sample();
         }
     }
     
@@ -49,10 +47,11 @@ public class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     }
     
     private List<Pair<S, A>> sampleKStateActionPairs() {
-        // TODO: Implement an "EqualDistribution" that takes in
-        //  a list of states, and then sample from it k times. will
-        //  need to add another method to IDistribution that's like
-        //  `List<S> sample(int k)` so we can sample k things from it.
-        throw new RuntimeException("Not implemented");
+        List<Pair<S, A>> state_action_pairs = new ArrayList<>(observedStateActionPairs);
+        if (state_action_pairs.size() < k) {
+            return state_action_pairs;
+        }
+        Collections.shuffle(state_action_pairs);
+        return state_action_pairs.subList(0, k);
     }
 }
