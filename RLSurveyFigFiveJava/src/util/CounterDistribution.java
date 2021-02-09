@@ -2,7 +2,7 @@ package util;
 
 import java.util.*;
 
-public class CounterDistribution<S> implements ICounterDistribution<S> {
+public final class CounterDistribution<S> implements ICounterDistribution<S> {
     private final Map<S, Counter> counts;
     private final Map<S, Double> probabilities;
     private boolean should_recompute = true;
@@ -61,7 +61,7 @@ public class CounterDistribution<S> implements ICounterDistribution<S> {
     
     @Override
     public String toString() {
-        return super.toString();
+        return "CounterDistribution{}";
     }
     
     // Private Methods
