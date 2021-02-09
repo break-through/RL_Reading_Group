@@ -7,7 +7,7 @@ import util.Pair;
 
 import java.util.*;
 
-public class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
+public final class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     private final int k;
     public DynaQLearningAgent(
         IEnvironment<S, A> environment,
@@ -17,6 +17,10 @@ public class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     ) {
         super(environment, alpha, gamma);
         this.k = k;
+    }
+    
+    public int getK() {
+        return k;
     }
     
     @Override
@@ -47,7 +51,9 @@ public class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     }
     
     private List<Pair<S, A>> sampleKStateActionPairs() {
-        List<Pair<S, A>> state_action_pairs = new ArrayList<>(observedStateActionPairs);
+        List<Pair<S, A>> state_action_pairs = new ArrayList<>(
+            getObservedStateActionPairs()
+        );
         if (state_action_pairs.size() < k) {
             return state_action_pairs;
         }

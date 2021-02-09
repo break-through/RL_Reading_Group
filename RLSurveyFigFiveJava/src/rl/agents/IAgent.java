@@ -19,21 +19,23 @@ import java.util.*;
  * @param <S> The kind of states you find in this environment
  * @param <A> The actions that this agent can take in this environment
  *
- * NOTE: DO NOT MODIFY THIS FILE.
+ * NOTE:
+ * - DO NOT MODIFY THIS FILE UNLESS IT MAKES SENSE TO.
+ * - I've made variables private EXPLICITLY. If it's private, it's meant
+ *   to be private, because you shouldn't be able to access that variable
+ *   in a subclass.
  */
 public abstract class IAgent<S, A> {
     /*
      * The environment of this agent. This environment can be accessed
      * publicly, and it represents the environment of this agent.
      */
-    public final IEnvironment<S, A> environment;
+    protected final IEnvironment<S, A> environment;
     /*
      * The history of this agent. This allows you to retrace where this
      * agent has been.
-     * Technically speaking, this variable is READ-ONLY. However, if you
-     * want to throw away experiences (by removing them), be my guest.
      */
-    protected final List<IExperience<S, A>> history;
+    private final List<IExperience<S, A>> history;
     
     /*
      * This counts the number of steps we've made so far!
@@ -45,18 +47,35 @@ public abstract class IAgent<S, A> {
      * far. This variable can be easily gotten from the history, but
      * this is extracting it here because it'll be more expensive to
      * get it from history.
-     * This is READ-ONLY!
      */
-    protected final Set<Pair<S, A>> observedStateActionPairs;
+    private final Set<Pair<S, A>> observedStateActionPairs;
+    
+    /*
+     * This represents the accumulated rewards
+     */
+    private double accumulatedRewards;
     
     public IAgent(IEnvironment<S, A> environment) {
         this.environment = environment;
         history = new ArrayList<>();
         stepCounter = new Counter();
         observedStateActionPairs = new HashSet<>();
+        accumulatedRewards = 0.0;
     }
     
     // Public Methods that are Useful
+    
+    public IEnvironment<S, A> getEnvironment() {
+        return environment;
+    }
+    
+    public double getAccumulatedRewards() {
+        return accumulatedRewards;
+    }
+    
+    public Set<Pair<S, A>> getObservedStateActionPairs() {
+        return new HashSet<>(observedStateActionPairs);
+    }
     
     /**
      * Returns the current state that this agent is in this its environment
@@ -86,6 +105,15 @@ public abstract class IAgent<S, A> {
         return lastExperienceImpl();
     }
     
+    final public List<IExperience<S, A>> history() {
+        return new ArrayList<>(history);
+    }
+    
+    final public boolean hasHistory() {
+        return this.history.size() > 0;
+    }
+    
+    
     /**
      * Policy returns the best action for the current state that this agent
      * is in. It's to be implemented by the class that implements this
@@ -102,17 +130,6 @@ public abstract class IAgent<S, A> {
      * variables!
      */
     abstract A policy();
-    
-    /**
-     * For Model-Based algorithms, implement this method to update
-     * the models right after taking an experience (i.e., an experience
-     * tuple). This method is called in the step phase before calling
-     * the {@link IAgent#learn()} method.
-     *
-     * Useful methods are listed in the {@link IAgent#policy()} method.
-     */
-    protected void updateModels() {
-    }
     
     /**
      * This method should learn from the most recent experience and,
@@ -167,10 +184,39 @@ public abstract class IAgent<S, A> {
     }
     
     //
-    // Private Methods that You can Use
+    // Protected Methods (that you can use in subclasses)
     //
     
-    final protected void stepImpl() {
+    /**
+     * For Model-Based algorithms, implement this method to update
+     * the models right after taking an experience (i.e., an experience
+     * tuple). This method is called in the step phase before calling
+     * the {@link IAgent#learn()} method.
+     *
+     * Useful methods are listed in the {@link IAgent#policy()} method.
+     */
+    protected void updateModels() {
+    }
+    
+    final protected S lastState() {
+        if (hasHistory()) {
+            return this.lastExperienceImpl().getNextState();
+        }
+        return environment.getStartState();
+    }
+    
+    final protected IExperience<S, A> lastExperienceImpl() {
+        if (!hasHistory()) {
+            throw new RuntimeException("This agent doesn't have a history");
+        }
+        return this.history.get(this.history.size() - 1);
+    }
+    
+    //
+    // Private Methods (you can't use these in subclasses)
+    //
+    
+    private void stepImpl() {
         if (canStep()) {
             // Do nothing if we can't take any actions at this state.
             return;
@@ -188,26 +234,9 @@ public abstract class IAgent<S, A> {
         observedStateActionPairs.add(
             Pair.make(experience.getState(), experience.getAction())
         );
+        accumulatedRewards += experience.getReward().reward();
         history.add(experience);
         updateModels();
         learn();
-    }
-    
-    final protected S lastState() {
-        if (hasHistory()) {
-            return this.lastExperienceImpl().getNextState();
-        }
-        return environment.getStartState();
-    }
-    
-    final protected IExperience<S, A> lastExperienceImpl() {
-        if (!hasHistory()) {
-            throw new RuntimeException("This agent doesn't have a history");
-        }
-        return this.history.get(this.history.size() - 1);
-    }
-    
-    final protected boolean hasHistory() {
-        return this.history.size() > 0;
     }
 }

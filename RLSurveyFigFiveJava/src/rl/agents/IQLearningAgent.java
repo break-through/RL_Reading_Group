@@ -7,12 +7,20 @@ import util.*;
 
 import java.util.*;
 
+/**
+ * This is an agent that learns by using the Q learning algorithm.
+ *
+ * NOTE:
+ * - I've made some variables private and some others protected. If
+ *   it's private, it's because it's intended to be (i.e., you shouldn't
+ *   be able to access it in its subclass!).
+ */
 public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     private final Map<Pair<S, A>, Double> Q;
     private final double alpha;
     private final double gamma;
     private final Map<Pair<S, A>, ICounterDistribution<S>> T;
-    private final Map<Pair<S, A>, Double> R;
+    protected final Map<Pair<S, A>, Double> R;
     private final Counter sampleBackupsCounter;
     private final Counter fullBackupsCounter;
     
@@ -31,6 +39,14 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         this.fullBackupsCounter = new Counter();
     }
     
+    final public double getAlpha() {
+        return alpha;
+    }
+    
+    final public double getGamma() {
+        return gamma;
+    }
+    
     final public long getTotalNumBackups() {
         return getNumSampleBackups() + getNumFullBackups();
     }
@@ -42,6 +58,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     final public long getNumFullBackups() {
         return fullBackupsCounter.value();
     }
+    
     
     final public double reward(S s, A a) {
         final Pair<S, A> pair = Pair.make(s, a);
@@ -79,7 +96,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         R.put(pair, r);
     }
     
-    final protected void updateTransitions(S s, A a, S s_prime) {
+    private void updateTransitions(S s, A a, S s_prime) {
         final Pair<S, A> pair = Pair.make(s, a);
         ICounterDistribution<S> dist = getTransitionDistribution(pair);
         dist.countUp(s_prime);
