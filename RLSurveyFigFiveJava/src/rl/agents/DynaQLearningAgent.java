@@ -40,7 +40,7 @@ public final class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     @Override
     void learn() {
         fullBackup(lastExperience());
-        for (Pair<S, A> pair : sampleKStateActionPairs()) {
+        for (final Pair<S, A> pair : sampleKStateActionPairs()) {
             fullBackup(pair);
         }
     }
@@ -51,7 +51,7 @@ public final class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     }
     
     private List<Pair<S, A>> sampleKStateActionPairs() {
-        List<Pair<S, A>> state_action_pairs = new ArrayList<>(
+        final List<Pair<S, A>> state_action_pairs = new ArrayList<>(
             getObservedStateActionPairs()
         );
         if (state_action_pairs.size() < k) {

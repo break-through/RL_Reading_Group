@@ -69,8 +69,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     }
     
     final public double transitionProb(S s, A a, S s_prime) {
-        ICounterDistribution<S> dist = getTransitionDistribution(s, a);
-        return dist.prob(s_prime);
+        return getTransitionDistribution(s, a).prob(s_prime);
     }
     
     @Override
@@ -92,13 +91,12 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
      * be the case in some environments!).
      */
     protected void updateReward(S s, A a, double r) {
-        final Pair<S, A> pair = Pair.make(s, a);
-        R.put(pair, r);
+        R.put(Pair.make(s, a), r);
     }
     
     private void updateTransitions(S s, A a, S s_prime) {
         final Pair<S, A> pair = Pair.make(s, a);
-        ICounterDistribution<S> dist = getTransitionDistribution(pair);
+        final ICounterDistribution<S> dist = getTransitionDistribution(pair);
         dist.countUp(s_prime);
         T.put(pair, dist);
     }
@@ -148,8 +146,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         final A a = experience.getAction();
         final double r = experience.getReward().reward();
         final S s_prime = experience.getNextState();
-        double new_value = alpha * (r + (gamma * maxQAtState(s_prime)) - getQ(s, a));
-        setQ(s, a, new_value);
+        setQ(s, a, alpha * (r + (gamma * maxQAtState(s_prime)) - getQ(s, a)));
     }
     
     final protected double maxQAtState(S s) {
@@ -163,7 +160,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     final protected A bestActionAtState(S s) throws RLException {
         final Set<Pair<S, A>> all_pairs = Q.keySet();
         final List<Pair<S, A>> okay_pairs = new ArrayList<>();
-        for (Pair<S, A> pair : all_pairs) {
+        for (final Pair<S, A> pair : all_pairs) {
             if (!pair.getLeft().equals(s)) {
                 continue;
             }

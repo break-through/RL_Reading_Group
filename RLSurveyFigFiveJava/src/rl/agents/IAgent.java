@@ -92,8 +92,7 @@ public abstract class IAgent<S, A> {
      * goal-state.
      */
     final public List<A> availableActions() {
-        final S currentState = getCurrentState();
-        return environment.getActionsForState(currentState);
+        return environment.getActionsForState(getCurrentState());
     }
     
     
