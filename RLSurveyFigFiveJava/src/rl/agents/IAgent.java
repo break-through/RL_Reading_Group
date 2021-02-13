@@ -216,7 +216,7 @@ public abstract class IAgent<S, A> {
     //
     
     private void stepImpl() {
-        if (canStep()) {
+        if (!canStep()) {
             // Do nothing if we can't take any actions at this state.
             return;
         }

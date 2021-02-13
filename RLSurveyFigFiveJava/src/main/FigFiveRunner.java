@@ -7,7 +7,7 @@ import rl.fig5.IState;
 
 public class FigFiveRunner {
     public static void main(String[] args) {
-        final int N = 5;
+        final int N = 10;
         FigFiveEnvironment env = new FigFiveEnvironment(N);
         System.out.println(env.getStats());
         System.out.println(env);
