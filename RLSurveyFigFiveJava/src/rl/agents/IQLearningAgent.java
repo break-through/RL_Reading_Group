@@ -17,7 +17,17 @@ import java.util.*;
  */
 public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     private final Map<Pair<S, A>, Double> Q;
-    private final double alpha;
+    
+    /**
+     * Alpha is mainly used in the sample backups. It represents the
+     * learning rate and ideally should be decreased down to zero
+     * slowly.
+     */
+    private double alpha;
+    
+    /**
+     * Gamma represents the discount factor.
+     */
     private final double gamma;
     private final Map<Pair<S, A>, ICounterDistribution<S>> T;
     protected final Map<Pair<S, A>, Double> R;
@@ -32,11 +42,12 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         super(environment);
         this.alpha = alpha;
         this.gamma = gamma;
-        this.Q = new HashMap<>();
-        this.T = new HashMap<>();
-        this.R = new HashMap<>();
-        this.sampleBackupsCounter = new Counter();
-        this.fullBackupsCounter = new Counter();
+        Q = new HashMap<>();
+        T = new HashMap<>();
+        R = new HashMap<>();
+        sampleBackupsCounter = new Counter();
+        fullBackupsCounter = new Counter();
+        initializeQ();
     }
     
     final public double getAlpha() {
@@ -45,6 +56,12 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     
     final public double getGamma() {
         return gamma;
+    }
+    
+    protected void initializeQ() {
+        for (final Pair<S, A> pair : environment.getAllStateActionPairs()) {
+            setQ(pair, RAND.nextDouble());
+        }
     }
     
     final public long getTotalNumBackups() {
@@ -84,6 +101,14 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     }
     
     /**
+     * This function is called after each sample backups.
+     * It returns a value that is used to update the learning rate by
+     * such that the new learning rate alpha = max(alpha + X, 0)
+     * where X is what's returned here.
+     */
+    abstract protected double learningRateUpdate();
+    
+    /**
      * Updates the reward of state-action pair (s, a). This method
      * is not final, so you may override it to give it a more
      * sophisticated implementation. The current one simply assumes
@@ -110,7 +135,11 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     }
     
     final protected void setQ(S s, A a, double value) {
-        Q.put(Pair.make(s, a), value);
+        setQ(Pair.make(s, a), value);
+    }
+    
+    final protected void setQ(Pair<S, A> pair, double value) {
+        Q.put(pair, value);
     }
     
     final protected double getQ(S s, A a) {
@@ -147,6 +176,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         final double r = experience.getReward().reward();
         final S s_prime = experience.getNextState();
         setQ(s, a, alpha * (r + (gamma * maxQAtState(s_prime)) - getQ(s, a)));
+        alpha = Math.max(0, alpha + learningRateUpdate());
     }
     
     final protected double maxQAtState(S s) {

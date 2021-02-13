@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-final public class FigFiveEnvironment implements IEnvironmentWithGoal<IState, IAction>, Iterable<IState> {
+final public class FigFiveEnvironment extends IEnvironmentWithGoal<IState, IAction> implements Iterable<IState> {
     final private int n;
     final private IEnvStats stats;
     

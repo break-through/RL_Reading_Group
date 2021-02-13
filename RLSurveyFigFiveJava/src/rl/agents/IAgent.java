@@ -57,6 +57,11 @@ public abstract class IAgent<S, A> {
      */
     private double accumulatedRewards;
     
+    /*
+     * A random variable to do random things.
+     */
+    protected static Random RAND = new Random();
+    
     public IAgent(IEnvironment<S, A> environment) {
         this.environment = environment;
         history = new ArrayList<>();
@@ -201,7 +206,7 @@ public abstract class IAgent<S, A> {
     
     final protected S lastState() {
         if (hasHistory()) {
-            return this.lastExperienceImpl().getState();
+            return lastExperienceImpl().getNextState();
         }
         return environment.getStartState();
     }
@@ -210,7 +215,7 @@ public abstract class IAgent<S, A> {
         if (!hasHistory()) {
             throw new RuntimeException("This agent doesn't have a history");
         }
-        return this.history.get(this.history.size() - 1);
+        return history.get(history.size() - 1);
     }
     
     //

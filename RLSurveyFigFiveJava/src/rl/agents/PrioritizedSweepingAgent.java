@@ -60,7 +60,13 @@ public final class PrioritizedSweepingAgent<S,A> extends IQLearningAgent<S,A> {
             return new EqualDistribution<>(availableActions()).sample();
         }
     }
-
+    
+    @Override
+    protected double learningRateUpdate() {
+        // If unsure, just copy that of DynaQLearningAgent
+        throw new RuntimeException("TO BE IMPLEMENTED");
+    }
+    
     @Override
     public void learn() {
         priorityK(); //to initialize and add new states as we see them
