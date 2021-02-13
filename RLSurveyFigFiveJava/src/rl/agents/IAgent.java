@@ -199,7 +199,7 @@ public abstract class IAgent<S, A> {
     
     final protected S lastState() {
         if (hasHistory()) {
-            return this.lastExperienceImpl().getNextState();
+            return this.lastExperienceImpl().getState();
         }
         return environment.getStartState();
     }
@@ -216,7 +216,7 @@ public abstract class IAgent<S, A> {
     //
     
     private void stepImpl() {
-        if (canStep()) {
+        if (!canStep()) {
             // Do nothing if we can't take any actions at this state.
             return;
         }
