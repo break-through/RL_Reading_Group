@@ -1,6 +1,7 @@
 package main;
 
 import rl.agents.DynaQLearningAgent;
+import rl.agents.IQLearningAgent;
 import rl.agents.PrioritizedSweepingAgent;
 import rl.env.IStepResult;
 import rl.fig5.IAction;
@@ -13,7 +14,7 @@ public class FigFiveRunner {
         if (true) {
             System.exit(0);
         }
-        final int N = 5;
+        final int N = 10;
         FigFiveEnvironment env = new FigFiveEnvironment(N);
         System.out.println(env.getStats());
         System.out.println(env);
@@ -28,51 +29,48 @@ public class FigFiveRunner {
         System.out.println(env.toStringInState(currentState));
         System.out.println(env.getActionsForState(currentState));
 
-        double gamma = .99;
-        double alpha = .01;
-        int k = 5;
-        DynaQLearningAgent<IState, IAction> theG = new DynaQLearningAgent<>(env, alpha, gamma, k);
-
-        int MAX_ITER = 5;
+        double GAMMA = .99;
+        double ALPHA = .01;
+        int K = 5;
+        int MAX_ITER = 5000;
         int iter = 0;
-        while(theG.canStep() && iter < MAX_ITER){
-            IState s = theG.getCurrentState(); //how is this supposed to happen? ie how do we 'step' the agent itself?
-            //current methods are not public - I can't pass in the agents state/action to the env presently
-            //the 'policy' method is out is what I mean. Isn't the agent supposed to:
-            //see where it is
-            //learn
-            //get the optimal policy
-            //then step?
-            //this requires the agent to have 'learn' and 'policy' as visible methods; or it requires the env
-            //automatically does that.
-            //There may be misintrepetations here - let's discuss. I see that there is no 'limit' to what we can make
-            //it - so
-            iter++;
 
-        }
+        PrioritizedSweepingAgent<IState, IAction> ayoPS = new PrioritizedSweepingAgent<>(env, ALPHA, GAMMA, K);
 
-        PrioritizedSweepingAgent<IState, IAction> thePriority = new PrioritizedSweepingAgent<>(env, alpha, gamma, k);
-        //In my implementation of PS, there was no barrier to make it 'public' from the design so I've made this public.
         iter = 0;
 
-        while(thePriority.canStep() && iter < MAX_ITER){
-            IState curS = thePriority.getCurrentState();
-
-            System.out.println(env.getStats());
-            System.out.println(env.toStringInState(curS));
-            System.out.println(env.getActionsForState(curS)); //each iteartion it will re update
-
-            thePriority.learn();
-            IAction acs = thePriority.policy();
-            IStepResult<IState> sR = env.step(curS, acs);
-
+        while(ayoPS.canStep() && iter < MAX_ITER){
+            System.out.println("=========================================");
+            System.out.printf("RUN #%d\n", iter);
+            System.out.println("=========================================");
+            System.out.println("Stepping:");
+            ayoPS.step(); //Discuss order.
+            System.out.printf("- lastExperience: %s \n", ayoPS.lastExperience());
+            System.out.println("State After Step:");
+            System.out.println(env.toStringInState(ayoPS.getCurrentState()));
+            System.out.println("Agent Details After Step:");
+            printAgentDetails(ayoPS);
+            if (!ayoPS.canStep()) {
+                System.out.println();
+                System.out.println("STOPPING BECAUSE CAN'T STEP ANYMORE");
+                break;
+            }
+            System.out.println();
+            iter++;
         }
 
-        IState finState = thePriority.getCurrentState();
-
-        System.out.println(env.getStats());
-        System.out.println(env.toStringInState(finState));
-        System.out.println(env.getActionsForState(finState)); //each iteartion it will re update
+        System.out.println();
+        System.out.println("OK DONE. Here are details one more time");
+        System.out.println("=========================================");
+        System.out.println("Environment:");
+        System.out.printf("- getStats: %s\n", env.getStats());
+        System.out.printf("- K: %s\n", K);
+        System.out.printf("- N: %s\n", N);
+        System.out.printf("- ALPHA: %s\n", ALPHA);
+        System.out.printf("- GAMMA: %s\n", GAMMA);
+        System.out.println("Agent:");
+        System.out.printf("- lastExperience: %s \n", ayoPS.lastExperience());
+        printAgentDetails(ayoPS);
 
         //multiagents :p?
 
@@ -136,7 +134,7 @@ public class FigFiveRunner {
         printAgentDetails(agent);
     }
     
-    private static void printAgentDetails(DynaQLearningAgent<IState, IAction> agent) {
+    private static void printAgentDetails(IQLearningAgent<IState, IAction> agent) {
         System.out.printf("- getNumSteps: %s \n", agent.getNumSteps());
         System.out.printf("- getAccumulatedRewards: %s \n", agent.getAccumulatedRewards());
         System.out.printf("- getNumFullBackups: %s \n", agent.getNumFullBackups());

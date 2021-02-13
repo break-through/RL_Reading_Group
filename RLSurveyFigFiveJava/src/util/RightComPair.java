@@ -2,7 +2,7 @@ package util;
 
 import java.util.Objects;
 
-public final class RightComPair<L, R extends Comparable<R>> {
+public final class RightComPair<L, R extends Comparable<R>> implements Comparable<RightComPair<L,R>>{
     private final L left;
     private final R right;
 
@@ -43,14 +43,16 @@ public final class RightComPair<L, R extends Comparable<R>> {
         return String.format("RightComPair(%s, %s)", getLeft(), getRight());
     }
 
+
+
+    @Override
     public int compareTo(RightComPair<L,R> pair) {
-        if((this.getRight().compareTo(this.getRight()) > 0)) {
+        if((this.getRight().compareTo(pair.getRight()) > 0)) {
             return 1;
-        } else if ((this.getRight().compareTo(this.getRight()) < 0)) {
+        } else if ((this.getRight().compareTo(pair.getRight()) < 0)) {
             return -1;
         } else {
             return 0;
         }
     }
-
 }
