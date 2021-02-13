@@ -169,7 +169,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
     
         double best_pair_value = 0.0;
         if (okay_pairs.size() == 0) {
-            throw new NoSuchFieldError();
+            throw new RLException("Didn't find any OK pair!");
         }
     
         Pair<S, A> best_pair = null;

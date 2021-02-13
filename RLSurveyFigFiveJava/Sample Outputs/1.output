@@ -1,0 +1,345 @@
+ENVIRONMENT STATS:
+- getStats: EnvStats(n=20, n_sqr=400, 2**n=1048576)Starting State:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+    ^
+=========================================
+RUN #0
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(1), a=forward, r=0, s_prime=State(2))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+         ^
+Agent Details After Step:
+- getNumSteps: 1
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 2
+- getNumSampleBackups: 0
+- getTotalNumBackups: 2
+
+=========================================
+RUN #1
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(2), a=forward, r=0, s_prime=State(3))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+              ^
+Agent Details After Step:
+- getNumSteps: 2
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 5
+- getNumSampleBackups: 0
+- getTotalNumBackups: 5
+
+=========================================
+RUN #2
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(3), a=back, r=0, s_prime=State(1))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+    ^
+Agent Details After Step:
+- getNumSteps: 3
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 9
+- getNumSampleBackups: 0
+- getTotalNumBackups: 9
+
+=========================================
+RUN #3
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(1), a=forward, r=0, s_prime=State(2))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+         ^
+Agent Details After Step:
+- getNumSteps: 4
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 13
+- getNumSampleBackups: 0
+- getTotalNumBackups: 13
+
+=========================================
+RUN #4
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(2), a=forward, r=0, s_prime=State(3))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+              ^
+Agent Details After Step:
+- getNumSteps: 5
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 17
+- getNumSampleBackups: 0
+- getTotalNumBackups: 17
+
+=========================================
+RUN #5
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(3), a=back, r=0, s_prime=State(1))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+    ^
+Agent Details After Step:
+- getNumSteps: 6
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 21
+- getNumSampleBackups: 0
+- getTotalNumBackups: 21
+
+=========================================
+RUN #6
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(1), a=forward, r=0, s_prime=State(2))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+         ^
+Agent Details After Step:
+- getNumSteps: 7
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 25
+- getNumSampleBackups: 0
+- getTotalNumBackups: 25
+
+=========================================
+RUN #7
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(2), a=forward, r=0, s_prime=State(3))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+              ^
+Agent Details After Step:
+- getNumSteps: 8
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 29
+- getNumSampleBackups: 0
+- getTotalNumBackups: 29
+
+=========================================
+RUN #8
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(3), a=back, r=0, s_prime=State(1))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+    ^
+Agent Details After Step:
+- getNumSteps: 9
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 33
+- getNumSampleBackups: 0
+- getTotalNumBackups: 33
+
+=========================================
+RUN #9
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(1), a=forward, r=0, s_prime=State(2))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+         ^
+Agent Details After Step:
+- getNumSteps: 10
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 37
+- getNumSampleBackups: 0
+- getTotalNumBackups: 37
+
+=========================================
+RUN #10
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(2), a=forward, r=0, s_prime=State(3))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+              ^
+Agent Details After Step:
+- getNumSteps: 11
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 41
+- getNumSampleBackups: 0
+- getTotalNumBackups: 41
+
+=========================================
+RUN #11
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(3), a=back, r=0, s_prime=State(1))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+    ^
+Agent Details After Step:
+- getNumSteps: 12
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 45
+- getNumSampleBackups: 0
+- getTotalNumBackups: 45
+
+=========================================
+RUN #12
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(1), a=forward, r=0, s_prime=State(2))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+         ^
+Agent Details After Step:
+- getNumSteps: 13
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 49
+- getNumSampleBackups: 0
+- getTotalNumBackups: 49
+
+=========================================
+RUN #13
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(2), a=forward, r=0, s_prime=State(3))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+              ^
+Agent Details After Step:
+- getNumSteps: 14
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 53
+- getNumSampleBackups: 0
+- getTotalNumBackups: 53
+
+=========================================
+RUN #14
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(3), a=back, r=0, s_prime=State(1))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+    ^
+Agent Details After Step:
+- getNumSteps: 15
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 57
+- getNumSampleBackups: 0
+- getTotalNumBackups: 57
+
+=========================================
+RUN #15
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(1), a=forward, r=0, s_prime=State(2))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+         ^
+Agent Details After Step:
+- getNumSteps: 16
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 61
+- getNumSampleBackups: 0
+- getTotalNumBackups: 61
+
+=========================================
+RUN #16
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(2), a=forward, r=0, s_prime=State(3))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+              ^
+Agent Details After Step:
+- getNumSteps: 17
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 65
+- getNumSampleBackups: 0
+- getTotalNumBackups: 65
+
+=========================================
+RUN #17
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(3), a=back, r=0, s_prime=State(1))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+    ^
+Agent Details After Step:
+- getNumSteps: 18
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 69
+- getNumSampleBackups: 0
+- getTotalNumBackups: 69
+
+=========================================
+RUN #18
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(1), a=forward, r=0, s_prime=State(2))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+         ^
+Agent Details After Step:
+- getNumSteps: 19
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 73
+- getNumSampleBackups: 0
+- getTotalNumBackups: 73
+
+=========================================
+RUN #19
+=========================================
+Stepping:
+- lastExperience: Experience(s=State(2), a=forward, r=0, s_prime=State(3))
+State After Step:
+       <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--  <--
+         |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9-> 10-> 11-> 12-> 13-> 14-> 15-> 16-> 17-> 18-> 19-> 20 -> G
+              ^
+Agent Details After Step:
+- getNumSteps: 20
+- getAccumulatedRewards: 0.0
+- getNumFullBackups: 77
+- getNumSampleBackups: 0
+- getTotalNumBackups: 77
