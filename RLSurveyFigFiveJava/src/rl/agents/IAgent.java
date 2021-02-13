@@ -199,7 +199,7 @@ public abstract class IAgent<S, A> {
     
     final protected S lastState() {
         if (hasHistory()) {
-            return this.lastExperienceImpl().getNextState();
+            return this.lastExperienceImpl().getState();
         }
         return environment.getStartState();
     }

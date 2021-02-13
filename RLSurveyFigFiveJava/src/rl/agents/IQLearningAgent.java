@@ -156,7 +156,14 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
             return 0.0;
         }
     }
-    
+
+    /**
+     * I have questions regarding this implementation - and how Q(s,a) is initialized. I know we 'see it' but this
+     * does *NOT* presently contain pre-initialized values for states we *DO* visit (so the agent should be able to
+     * *see* the value). Currently, if the agent visits a state s, the agent sees the best action at s - but in this
+     * implementation, there is no Q(S,A) value for it yet and it fails (if I interpreted it properly). Let's discuss.
+     * */
+
     final protected A bestActionAtState(S s) throws RLException {
         final Set<Pair<S, A>> all_pairs = Q.keySet();
         final List<Pair<S, A>> okay_pairs = new ArrayList<>();
@@ -166,7 +173,7 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
             }
             okay_pairs.add(pair);
         }
-    
+
         double best_pair_value = 0.0;
         if (okay_pairs.size() == 0) {
             throw new NoSuchFieldError();
@@ -183,4 +190,24 @@ public abstract class IQLearningAgent<S, A> extends IAgent<S, A> {
         }
         return best_pair.getRight();
     }
+
+
+    /*final protected A bestActionAtState(S s) throws RLException {
+        List<A> a = this.getEnvironment().getActionsForState(s);
+        A bestA = null;
+        double maxVal = Double.NEGATIVE_INFINITY;
+        for(A ayo : a){
+            double value = getQ(s, ayo);
+            if (value > maxVal){
+                bestA = ayo;
+                maxVal = value;
+            }
+        }
+        if (bestA == null){
+            throw new NoSuchFieldError();
+        }
+        return bestA;
+    }
+    */
+
 }
