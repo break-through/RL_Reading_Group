@@ -41,6 +41,11 @@ public final class EqualDistribution<S> implements IDistribution<S> {
         return "EqualDistribution{}";
     }
     
+    public EqualDistribution<S> add(S s) {
+         // TODO: Victor implement this.
+        throw new RuntimeException("not implemented");
+    }
+    
     private int size() {
          return this.states.size();
     }
