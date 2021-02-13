@@ -1,5 +1,8 @@
 package rl.env;
 
+import util.Pair;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,9 +21,19 @@ import java.util.List;
  * agent may earn a reward that is encoded in the StepResult.
  * @see #step(Object, Object)
  */
-public interface IEnvironment<S, A> {
-    S getStartState();
-    List<S> getAllStates();
-    List<A> getActionsForState(S state);
-    IStepResult<S> step(S state, A action);
+public abstract class IEnvironment<S, A> {
+    public abstract S getStartState();
+    public abstract List<S> getAllStates();
+    public abstract List<A> getActionsForState(S state);
+    public abstract IStepResult<S> step(S state, A action);
+    
+    final public List<Pair<S, A>> getAllStateActionPairs() {
+        List<Pair<S, A>> all_pairs = new ArrayList<>();
+        for (final S s : getAllStates()) {
+            for (final A a : getActionsForState(s)) {
+                all_pairs.add(Pair.make(s, a));
+            }
+        }
+        return all_pairs;
+    }
 }

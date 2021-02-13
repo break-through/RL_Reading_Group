@@ -81,16 +81,16 @@ public class FigFiveRunner {
     
     private static void runFigFive() {
         final int N = 20;
-        final double ALPHA = 0.1;
-        final double GAMMA = 0.1;
+        final double ALPHA = 0.01;
+        final double GAMMA = 0.99;
         final int K = 4;
-        final int STEPS = 20;
+        final int STEPS = 1000;
         FigFiveEnvironment env = new FigFiveEnvironment(N);
         DynaQLearningAgent<IState, IAction> agent = new DynaQLearningAgent<>(env, ALPHA, GAMMA, K);
     
         System.out.println("ENVIRONMENT STATS:");
         System.out.println("=========================================");
-        System.out.printf("- getStats: %s", env.getStats());
+        System.out.printf("- getStats: %s\n", env.getStats());
         if (!agent.canStep()) {
             System.out.println("JUST STARTED BUT CAN'T EVEN STEP! STOPPING NOW.");
             return;
@@ -118,5 +118,6 @@ public class FigFiveRunner {
             }
             System.out.println();
         }
+        System.out.println();
     }
 }

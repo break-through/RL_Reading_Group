@@ -10,6 +10,6 @@ package rl.env;
  * goal states that an agent ideally is trying to get to.
  * @see #isGoalState(Object)
  */
-public interface IEnvironmentWithGoal<S, A> extends IEnvironment<S, A> {
-    boolean isGoalState(S state);
+public abstract class IEnvironmentWithGoal<S, A> extends IEnvironment<S, A> {
+    public abstract boolean isGoalState(S state);
 }

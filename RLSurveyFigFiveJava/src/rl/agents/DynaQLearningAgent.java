@@ -38,6 +38,16 @@ public final class DynaQLearningAgent<S, A> extends IQLearningAgent<S, A> {
     }
     
     @Override
+    protected double learningRateUpdate() {
+        // Reduce by 5 percent each time. This is arbitrary
+        // and probably should be made into a method.
+        // TODO: should make this into a parameter... Actually,
+        //  this is perfect for the Strategy pattern. Like, a
+        //  LearningRateStrategy. WOW! Nice idea.
+        return -0.05 * getAlpha();
+    }
+    
+    @Override
     void learn() {
         fullBackup(lastExperience());
         for (final Pair<S, A> pair : sampleKStateActionPairs()) {
