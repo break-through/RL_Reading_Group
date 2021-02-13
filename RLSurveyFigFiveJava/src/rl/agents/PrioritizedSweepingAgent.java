@@ -22,21 +22,16 @@ public final class PrioritizedSweepingAgent<S,A> extends IQLearningAgent<S,A> {
      iteration, and given it's usage of alpha, gamma, made the most sense according to the implementor of these
      interfaces (who I hear is a millionaire rapper, movie producer, actor, nobel laureate, photographer and has
      the legit time management skills to do this while working a full time job - what a legendary G)).
-
      A deep prayer:
-
      Professor Max Goldman, I apologize deeply for ignoring my Abstraction Function, and yes, a check rep would be
      the minimal amount of work I should do but I'm too lazy to do that too. Threadsafety isn't a concern here but
      for memories sake, considering it truly isn't neeeded here at *all* I'll pop it in.
-
      Threadsafe Argument() - This code is threadsafe.
-
      You know, that's about as much effort I put into the threadsafe arguments during class too when the code *was*
      actually at risk of thread issues. Anyways, Max, I hope you do well in life, and I apologize for not using your
      skills, but deeply admire your energy and the time you taught us to be bolder than functional programmers. Maybe
      someday I'll learn from this and heed your teachings - the little that stuck with me has really helped.
-
-    */
+     */
 
     private static final Double DEFAULT_PRIORITY = 0.0;
     private final int k;
@@ -86,7 +81,7 @@ public final class PrioritizedSweepingAgent<S,A> extends IQLearningAgent<S,A> {
         this.easyFind.put(cur, improvedCurPair); //a little dance to get the current state always high up
         //can discuss if this is not proper - see coments below
 
-        while (iteration < this.k+1) { //discuss here... (is it until 'k' heap is emptied? Or just k iterations?)
+        while (iteration < this.k + 1 && this.maxPriority.size() > 0) { //discuss here... (is it until 'k' heap is emptied? Or just k iterations?)
             //for now I've done 'k' iterations (plus the current state; see comment below)
 
             //discuss - the first state is always the present state, but Kaelbling doesn't explicitely say so for PS
@@ -94,6 +89,7 @@ public final class PrioritizedSweepingAgent<S,A> extends IQLearningAgent<S,A> {
             curPair = this.maxPriority.poll();
             this.easyFind.remove(curPair.getLeft());
             S curState = curPair.getLeft(); //comparator ensures maximal
+
             double v_old = value(curState);
 
             A a = null; //normally we'd throw an error below so this isn't a issue - TODO to change.
