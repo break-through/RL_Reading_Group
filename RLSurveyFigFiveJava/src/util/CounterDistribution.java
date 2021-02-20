@@ -21,6 +21,12 @@ public final class CounterDistribution<S> implements ICounterDistribution<S> {
         counts.get(s).increment();
         should_recompute = true;
     }
+
+    @Override
+    public void add(S s) {
+        // TODO: Victor implement this.
+        throw new RuntimeException("not implemented");
+    }
     
     @Override
     public double prob(S s) {
