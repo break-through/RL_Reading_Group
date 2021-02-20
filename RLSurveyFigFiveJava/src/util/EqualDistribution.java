@@ -4,18 +4,22 @@ import java.util.*;
 
 public final class EqualDistribution<S> implements IDistribution<S> {
     private final List<S> states;
-    private final double prob;
+    private double prob;
     private final Random random = new Random();
-    
-     public EqualDistribution(Collection<S> states) {
-         if (states.size() == 0) {
-             throw new IllegalArgumentException(
+
+    // This is a constructor. Takes in arguments 'states'
+    public EqualDistribution(Collection<S> states) {
+        // if no states, i.e. states=[], throw argument
+        if (states.size() == 0) {
+            throw new IllegalArgumentException(
                  "EqualDistribution requires at least one element"
-             );
-         }
-         this.states = new ArrayList<>(states);
-         prob = 1 / (double) size();
-     }
+            );
+        }
+        // set the instantiated object's states to the ones passed in
+        this.states = new ArrayList<>(states);
+        // set prob to 1/size() (why not have prob as object property instead of class property?)
+        prob = 1 / (double) size();
+    }
     
     @Override
     public double prob(S s) {
@@ -40,12 +44,16 @@ public final class EqualDistribution<S> implements IDistribution<S> {
     public String toString() {
         return "EqualDistribution{}";
     }
-    
-    public EqualDistribution<S> add(S s) {
+
+    @Override
+    final public void add(S s) {
          // TODO: Victor implement this.
-        throw new RuntimeException("not implemented");
+        // Questions:
+           // since this operation makes sense with any distribution, describe it as an abstract method in IDistribution?
+        this.states.add(s);
+        prob = 1 / (double) size();
     }
-    
+
     private int size() {
          return this.states.size();
     }
