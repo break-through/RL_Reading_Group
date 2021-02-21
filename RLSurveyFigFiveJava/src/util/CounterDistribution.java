@@ -9,12 +9,13 @@ public final class CounterDistribution<S> implements ICounterDistribution<S> {
     private static final Random RAND = new Random();
     
     public CounterDistribution() {
-        this.counts = new HashMap<>();
+        this.counts = new HashMap<>(); // Shouldn't we be modifying 'this.counts' in the methods instead of 'counts' since it's a class attribute 'counts'
         this.probabilities = new HashMap<>();
     }
     
     @Override
     public void countUp(S s) {
+        // why can we change 'counts' if its final variable?
         if (!hasState(s)) {
             counts.put(s, new Counter());
         }
@@ -24,8 +25,11 @@ public final class CounterDistribution<S> implements ICounterDistribution<S> {
 
     @Override
     public void add(S s) {
-        // TODO: Victor implement this.
-        throw new RuntimeException("not implemented");
+        if(hasState(s)) {
+            throw new RuntimeException("State being added is already in state-space");
+        }
+        counts.put(s, new Counter());
+        setProbability(s, 0.0);
     }
     
     @Override
