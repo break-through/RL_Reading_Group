@@ -15,7 +15,9 @@ public final class CounterDistribution<S> implements ICounterDistribution<S> {
     
     @Override
     public void countUp(S s) {
-        // why can we change 'counts' if its final variable?
+        // Questions:
+           // why can we change 'counts' if its final variable?
+           // 'countUp' isn't called, should we call it after sampling the state?
         if (!hasState(s)) {
             counts.put(s, new Counter());
         }
